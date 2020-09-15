@@ -32,6 +32,8 @@ If you're like me and have more than one Python installation on your computer - 
 
 ## Loading in a Python Library
 
+To load in any Python library, assuming it is installed on the Python system available, then we can use the `import` function to load all the information about that Python library, into an R object.
+
 ```{r import_numpy}
 # create variable with library name
 np <- import("numpy")
@@ -44,11 +46,13 @@ We can see Python functions from this package on the [numpy website](https://num
 
 In Python when we want to use functions from a package we must always specify the package that it comes from. In R this would be the same as always using the `::` to reference functions i.e. `dplyr::select()`
 
-When using Python in R, we use the `$` symbol to access functions
+Normally in Python, we would use the `.` symbol for this; however, in R this symbol can just be part of an object name. Because of this, when using Python in R, we use the `$` symbol to access functions.
 
 ```{r numpy1, eval=FALSE}
 np$mean(...)
 ```
+
+
 
 ## Python Help Files
 
@@ -64,15 +68,15 @@ knitr::include_graphics("images/Numpy Help.png", )
 
 ## Using Python Functions
 
-Once we know what the Python function we need is, we can use it on many R objects, as we would R functions;
+Once we know what the Python function we need is, we can use it on many R objects, as we would R functions, and `{reticulate}` does the clever task of allowing the Python functions to work on many standard R objects.
 
 ```{r numpy2}
 np$mean(mtcars$mpg)
 ```
 
-We can also use tab completion to see other functions in the package;
+We can use tab completion to see other functions in the package;
 
-```{r numpy_tab, echo=FALSE, out.width='70%'}
+```{r numpy_tab, echo=FALSE, out.width='50%'}
 knitr::include_graphics("images/Tab Completion.png")
 ```
 
@@ -145,7 +149,7 @@ p <- ggplot(data=mtcars, aes(x=mpg, y=wt)) +
 
 ---
 
-Within R to view this plot, we simply `print` it (or just call the object):
+We know, that within R to view this plot, we simply `print` it (or just call the object):
 
 ```{r ggplot_ex2, out.width='50%'}
 print(p)
@@ -155,9 +159,9 @@ But this is a little different in Python...
 
 ---
 
-We need to now '`print`' our seaborn plot to see it - we cannot use the standard print function from R, but must use something similar from Python. The following loads in part of the `matplotlib` package in Python, so we can view the plot.
+We need to '`print`' our seaborn plot to see it - we cannot use the standard print function from R, but must use something similar from Python. The following loads in part of the `matplotlib` package in Python, so we can view the plot.
 
-Runnig below opens a new window external to RStudio, for you to view the plot.
+Running below opens a new window external to RStudio, for you to view the plot- this is interactive, and allows for re-sizing and saving of the plot too.
 
 ```{r seaborn2, eval = FALSE}
 plt <- import("matplotlib.pyplot")
@@ -167,8 +171,6 @@ plt$show()
 ```{r seaborn_plot_out, echo=FALSE, out.width='60%'}
 knitr::include_graphics("images/Seaborn Plot.png")
 ```
-
-This prints all the Python plots waiting to be generated.
 
 ## Formative Assessment 2
 
@@ -206,6 +208,11 @@ sb$lmplot(data = mtcars, x = "mpg", y = "wt")
 # view it
 plt$show()
 ```
+
+### INFO: Calling `plt$show()` prints all previous plots
+
+When calling `plt$show()` we print all the Python plots waiting to be generated, so running another plotting function prior to 'printing' the plot, we would have multiple pop up windows to view all the plots waiting to be shown.
+
 
 ## Summative Assessment
 
