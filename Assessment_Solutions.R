@@ -56,23 +56,34 @@
 
 # Summative Assessment ----------------------------------------------------
 
-# 1. Create a linear model plot for `Sepal.Length` against `Sepal.Width` for 
-# the `iris` data set
+
+# 1. Import the `"numpy"` Python library, and find the mean and median 
+# `Sepal.Length` values from the `iris` data set
 # 
-# 2. Open the help file for the `lmplot` function, find the argument to change
-# the colour of the plot to depend on the `Species` variable
+# 2. Import the `"seaborn"` and `"matplotlib.pyplot"` Python libraries,
+# create and view a linear model plot (`lmplot`) displaying the `Sepal.Length` 
+# against `Sepal.Width` from the `iris` data set
 # 
 # *Extension:*
 #   
-# 3. Using any methods you'd like (help files, internet, tab completion ...)
-# - create a boxplot chart showing the distribution of the `Sepal.Length` 
-# variable, per each `Species`
-
+# 3. Using any methods you'd like (help files, internet, tab completion, etc.)
+# find the function in `"seaborn"` that can be used to create a boxplot, and make
+# one showing the distribution of the `Sepal.Length` variable for each `Species`
+# 
 
 # 1.
 
 # load in packages R & Python
 library(reticulate)
+np <- import("numpy")
+
+np$mean(iris$Sepal.Length)
+np$median(iris$Sepal.Length)
+
+
+# 2.
+
+# load in packages R & Python
 sb <- import("seaborn")
 plt <- import("matplotlib.pyplot")
 
@@ -81,13 +92,6 @@ sb$lmplot(data = iris, x = "Sepal.Length", y = "Sepal.Width")
 
 # view plot
 plt$show()
-
-
-# 2.
-
-sb$lmplot(data = iris, x = "Sepal.Length", y = "Sepal.Width", hue = "Species")
-plt$show()
-# Note: `col` argument exists but means 'columns' like Facets in R
 
 
 # 3.
